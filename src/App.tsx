@@ -1,16 +1,10 @@
 import * as React from 'react';
 import Routes from 'src/routes/index';
-import request from 'src/utils/request';
+import { query } from 'src/store/index';
 
 class App extends React.Component {
   componentWillMount() {
-    this.load();
-  }
-
-  load = () => {
-    return (async function query() {
-      await request('/recommend/resource', 'get', {});
-    })()
+    query();
   }
 
   public render() {
