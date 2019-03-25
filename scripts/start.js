@@ -1,3 +1,9 @@
+/*
+ * @Author: Rainy
+ * @Github: https://github.com/Rain120
+ * @Date: 2019-03-21 21:23:13
+ * @LastEditTime: 2019-03-23 16:41:06
+ */
 'use strict';
 
 // Do this as the first thing so that any code reading it knows the right env.
@@ -89,7 +95,7 @@ choosePort(HOST, DEFAULT_PORT)
         clearConsole();
       }
       console.log(chalk.cyan('Starting the development server...\n'));
-      openBrowser(urls.localUrlForBrowser);
+      // openBrowser(urls.localUrlForBrowser);
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {
