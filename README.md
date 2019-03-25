@@ -2,7 +2,7 @@
  * @Author: Rainy
  * @Github: https://github.com/Rain120
  * @Date: 2019-01-06 15:26:29
- * @LastEditTime: 2019-03-23 19:57:57
+ * @LastEditTime: 2019-03-25 22:03:18
  -->
 
 `React` + `Antd` + `Axios` 网易云音乐网页版
@@ -38,7 +38,7 @@ A: `package.json`添加下面配置
       "target": "http://localhost:3000",
       "changeOrigin": true,
       "pathRewrite": {
-        "^/api": "/api"
+        "^/api": "/"
       }
     }
   }
@@ -48,4 +48,5 @@ A: `package.json`添加下面配置
 > 
 > ![axios-404](./errorRepo/axios/axios-404.png) ![network](./errorRepo/axios/network.png)
 
-A: 
+A: `package.json` 中`proxy`配置问题
+
