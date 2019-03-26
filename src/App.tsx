@@ -1,15 +1,16 @@
 import * as React from 'react';
 import Routes from 'src/routes/index';
-import { query } from 'src/store/index';
+import { Provider } from 'mobx-react';
+import store from 'src/store/index';
 
 class App extends React.Component {
-  componentWillMount() {
-    query();
-  }
+  componentWillMount() {}
 
   public render() {
     return (
-      <Routes />
+      <Provider {...store}>
+        <Routes />
+        </Provider>
     );
   }
 }
