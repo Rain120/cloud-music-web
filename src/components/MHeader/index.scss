@@ -1,0 +1,25 @@
+.header-wrapper {
+  background: #242424;
+  color: #cccccc;
+  height: 70px;
+  line-height: 70px;
+  .menus {
+    list-style: none;
+    display: inline-block;
+    li {
+      float: left;
+      margin: 0 10px;
+      line-height: 70px;
+    }
+  }
+  .search-box {
+    float: left;
+  }
+  .user {
+    float: left;
+  }
+  .submenus {
+    height: 35px;
+    background: #C20C0C;
+  }
+}
