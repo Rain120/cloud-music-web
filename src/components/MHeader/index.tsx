@@ -10,26 +10,54 @@ export default class Layout extends Component {
         <Row
           type="flex"
           align="middle">
-          <Col span={8}>
-            <div>网易云音乐</div>
+          <Col span={6}>
+            <div className="common logo" />
           </Col>
           <Col span={8}>
-            <ul className='menus'>
-              <li>发现音乐</li>
+            <ul className='common menus'>
+              <li className="menu-active">
+                <span>
+                  <em>发现音乐</em>
+                  <sub className="cor">&nbsp;</sub>
+                </span>
+              </li>
               <li>我的音乐</li>
               <li>朋友</li>
               <li>音乐人</li>
               <li>下载客户端</li>
             </ul>
           </Col>
-          <Col span={8}>
-            <div className='search-box'>
-              <AutoComplete dataSource={[]} />
+          <Col span={6}>
+            <div className='common search-box'>
+              <AutoComplete
+                placeholder={"音乐/视频/电台/用户"}
+                dataSource={[]} />
             </div>
-            <div className='user'>user</div>
+            <div className='common user'>user</div>
           </Col>
           <Col span={24}>
-            <div className='submenus'>123</div>
+            <div className='submenus'>
+              <ul>
+                <li className="sub-common sub-active">
+                  <span className="title">推荐</span>
+                </li>
+                <li className="sub-common">
+                  <span className="title">排行榜</span>
+                </li>
+                <li className="sub-common">
+                  <span className="title">歌单</span>
+                </li>
+                <li className="sub-common">
+                  <span className="title">主播电台</span>
+                </li>
+                <li className="sub-common">
+                  <span className="title">用户</span>
+                </li>
+                <li className="sub-common">
+                  <span className="title">新碟上架</span>
+                </li>
+              </ul>
+            </div>
           </Col>
         </Row>
       </div>
