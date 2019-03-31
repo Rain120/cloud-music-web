@@ -2,3 +2,7 @@
 @import './common/normalize';
 @import './fonts/iconfont';
 @import './antd_override';
+
+html, body {
+  background: #f5f5f5;
+}

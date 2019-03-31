@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Routes from 'src/routes/index';
 import { query } from 'src/store/index';
+import { BackTop } from 'antd';
 
 class App extends React.Component {
   componentWillMount() {
@@ -9,7 +10,10 @@ class App extends React.Component {
 
   public render() {
     return (
-      <Routes />
+      <div>
+        <Routes />
+        <BackTop visibilityHeight={10} />
+      </div>
     );
   }
 }

@@ -43,30 +43,31 @@
     float: left;
     margin-left: 15px;
   }
-  .submenus {
+  .sub-menu {
     height: 34px;
     line-height: 35px;
-    padding-left: 390px;
     background: #C20C0C;
-    ul {
-      li {
-        float: left;
-        height: 34px;
-        text-align: center;
-      }
-      .sub-common {
-        display: inline-block;
-        font-size: 12px!important;
-        height: 20px;
-        padding: 0 13px;
-        margin: 7px 17px 0;
-        border-radius: 20px;
-        line-height: 21px;
-        color: #fff;
-        text-decoration: none;
-      }
-      .sub-active {
-        background: #9B0909;
+    .submenus {
+      ul {
+        li {
+          float: left;
+          height: 34px;
+          text-align: center;
+        }
+        .sub-common {
+          display: inline-block;
+          font-size: 12px!important;
+          height: 20px;
+          padding: 0 13px;
+          margin: 7px 17px 0;
+          border-radius: 20px;
+          line-height: 21px;
+          color: #fff;
+          text-decoration: none;
+        }
+        .sub-active {
+          background: #9B0909;
+        }
       }
     }
   }
