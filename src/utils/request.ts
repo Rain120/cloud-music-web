@@ -2,7 +2,7 @@
  * @Author: Rainy
  * @Github: https://github.com/Rain120
  * @Date: 2019-03-22 21:08:19
- * @LastEditTime: 2019-03-23 17:31:11
+ * @LastEditTime: 2019-04-02 22:32:29
  */
 import axios from 'axios';
 
@@ -20,10 +20,10 @@ function request (url, method, options = {}) {
   return axios[method](url, options)
     .then(
       response => {
-        if (!response) {
+        if (!response.data) {
           throw Error('response is null')
         }
-        return response
+        return response.data
       },
       error => { throw error }
     )

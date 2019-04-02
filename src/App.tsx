@@ -1,29 +1,26 @@
 import * as React from 'react';
 import Routes from 'src/routes/index';
-import { observer, inject } from 'mobx-react';
-// import { toJS } from 'mobx';
-import { Store } from 'src/store/index';
-import { BackTop } from 'antd';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import { LocaleProvider, BackTop } from 'antd';
+import { Provider } from 'mobx-react';
 
 interface AppProps {
-  recommend?: any;
+  store: any;
 }
 
-@inject((store: Store) => ({
-  recommend: store.recommendStore,
-}))
-@observer
 class App extends React.Component<AppProps, any> {
-  componentWillMount() {
-    this.props.recommend.getBanner();
-  }
 
   public render() {
+    const { store } = this.props;
     return (
-      <div>
-        <Routes />
-        <BackTop visibilityHeight={10} />
-      </div>
+      <Provider {...store}>
+        <LocaleProvider locale={zhCN}>
+          <div>
+            <Routes />
+            <BackTop visibilityHeight={10} />
+          </div>
+        </LocaleProvider>
+      </Provider>
     );
   }
 }

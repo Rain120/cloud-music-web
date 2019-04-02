@@ -1,8 +1,23 @@
 import React, { Component } from "react";
 import "./index.scss";
+import { Store } from 'src/store/index';
+import { observer, inject } from 'mobx-react';
+// import { toJS } from 'mobx';
 import { Icon, Row, Col, Button } from "antd";
 
-export default class Home extends Component {
+interface HomeProps {
+  recommend?: any;
+}
+
+@inject((store: Store) => ({
+  recommend: store.recommendStore,
+}))
+@observer
+export default class Home extends Component<HomeProps, any> {
+  componentWillMount() {
+    this.props.recommend.loadBanner();
+  }
+
   render() {
     return (
       <div className="home-wrapper">

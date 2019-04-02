@@ -55,3 +55,8 @@ A: `package.json` 中`proxy`配置问题
 > ![iconfont_import_error](./errors_screenshot/fonts/iconfont_import_error.png)
 
 A: 在引入文件之前添加`/`
+
+> 3、`React.Children.only expected to receive a single React element child.`
+> ![single-react-element](./errors_screenshot/react/single-react-element.png) ![app_tsx](./errors_screenshot/react/app_tsx.png)
+
+A: 将`Provider`内的`Dom`用一个元素包裹
