@@ -2,7 +2,7 @@
  * @Author: Rainy
  * @Github: https://github.com/Rain120
  * @Date: 2019-01-06 15:26:29
- * @LastEditTime: 2019-03-30 22:36:30
+ * @LastEditTime: 2019-04-03 21:57:57
  -->
 
 `React` + `Antd` + `Axios` 网易云音乐网页版
@@ -16,6 +16,10 @@
 #### `分支`
   - `routes` 路由设置
   - `axios-config` `axios`请求配置
+
+#### `Typescript`
+
+[typescript中文文档](https://www.tslang.cn/docs/handbook/compiler-options.html)
 
 #### `Error`
 

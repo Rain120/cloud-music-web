@@ -2,6 +2,7 @@
   "name": "cloud-music-web",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "antd": "^3.11.6",
     "autoprefixer": "7.1.6",
