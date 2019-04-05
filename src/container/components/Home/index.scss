@@ -1,20 +1,19 @@
 .home-wrapper {
   height: 100vh;
   .carousel {
-    height: 336px;
+    height: 329px;
+    position: relative;
     .swiper-container {
       width: 1080px;
       height: 330px;
     }
   }
   .left-content {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
-    border: 1px solid blue;
     .discover-module {
-      border: 1px solid green;
       .l-common {
-        padding: 20px 20px 40px;
+        padding: 20px;
         .header-nav {
           height: 33px;
           padding: 0 10px;
@@ -24,6 +23,16 @@
             font-size: 20px;
             color: #333333;
           }
+          .tags {
+            .tag {
+              font-size: 12px;
+              padding: 0 10px;
+              border-right: 1px solid #ccc;
+              &:last-child {
+                border: none!important;
+              }
+            }
+          }
           .more {
             line-height: 34px;
             float: right;
@@ -32,13 +41,33 @@
           }
         }
       }
-      .recommend {}
-      .new-album {}
-      .rank-lists {}
+      .recommend {
+        .song-list {
+          margin: 20px;
+          width: 140px;
+          height: 204px;
+          padding-left: 42px;
+          .list-info {
+            width: 140px;
+            height: 140px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .list-name {
+            width: 140px;
+            line-height: 1.4;
+            margin: 8px 0 3px;
+            font-size: 14px;
+          }
+        }
+      }
+      // .new-album {}
+      // .rank-lists {}
     }
   }
   .right-content {
-    border: 1px solid #333333;
     .r-common {
       .r-header {
         height: 23px;

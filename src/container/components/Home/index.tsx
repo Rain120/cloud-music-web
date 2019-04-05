@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
 import Swiper from 'swiper/dist/js/swiper.min.js';
 import 'swiper/dist/css/swiper.min.css';
+import * as Graphics from 'src/container/base/Graphics';
 import { Icon, Row, Col, Button } from "antd";
 
 interface HomeProps {
@@ -17,18 +18,31 @@ interface HomeProps {
 @observer
 export default class Home extends Component<HomeProps, any> {
 
+  state = {
+    isLogin: true,
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
   componentWillMount() {
-    this.props.recommend.loadBanner();
+    const { recommend } = this.props;
+    recommend.loadBanner();
+    recommend.loadTags();
+    recommend.loadSongLists();
+    recommend.loadAlbums();
+    recommend.loadRankLists();
   }
 
   componentDidMount() {
     new Swiper(".swiper-container", {
+      slidesPerView: 1,
+      spaceBetween: 30,
       loop: true,
-      autoplay: {
-        delay: 3000,
-        stopOnLastSlide: false,
-        disableOnInteraction: true,
-      },
+      autoplay: true,
+      effect : 'coverflow',
+      centeredSlides: true,
       pagination: {
         el: '.swiper-pagination',
       },
@@ -36,54 +50,113 @@ export default class Home extends Component<HomeProps, any> {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      lazy: {
-        loadPrevNext: true,
-      },
       observer: true,
+      observeParents: true,
+      observeSlideChildren: true,
     });
-}
+  }
 
+  more = (custom = {}) => {
+    let style = {
+      marginLeft: '5px',
+      ...custom,
+    };
+    return (
+      <span className="more">更多<Icon type="arrow-right" style={style} /></span>
+    )
+  }
 
   render() {
+    const { isLogin } = this.state;
     const { recommend } = this.props;
-    let lists = toJS(recommend.banners)
+    let banners: any = toJS(recommend.banners);
+    let tags: any = toJS(recommend.tags);
+    let songLists: any = toJS(recommend.songLists);
+    let albums: any = toJS(recommend.albums);
+    let rankLists: any = toJS(recommend.rankLists);
+    let options: any = {
+      style: {
+        marginRight: '10px',
+        border: '5px solid #BC4141',
+      } as any,
+    }
     return (
       <div className="home-wrapper">
         <div className="carousel">
           <div className="swiper-container">
             <div className="swiper-wrapper">
-              {lists.map((list, index) => (
+              {banners.map((banner, index) => (
                 <div key={index} className="swiper-slide">
                   <div className="slide">
-                    <img src={list.imageUrl} className="swiper-lazy" />
+                    <img src={banner.imageUrl} className="swiper-lazy" />
                   </div>
                 </div>
               ))}
             </div>
             <div className="swiper-pagination" />
-            <div className="swiper-button-prev" />
-            <div className="swiper-button-next" />
           </div>
+          <div className="swiper-button-prev" />
+          <div className="swiper-button-next" />
         </div>
         <Row className="left-content">
           <Col span={17}>
             <div className="discover-module">
               <div className="l-common recommend">
                 <div className="header-nav">
+                  {
+                    Graphics.CustomizeCircle(options)
+                  }
                   <span className="title">热门推荐</span>
-                  <span className="more">更多<Icon type="arrow-right" style={{ marginLeft: '5px' }} /></span>
+                  <span className="tags">
+                    {
+                      tags && tags.slice(0, 5).map((tag) => (
+                        <span className="tag" key={tag.id}>{tag.name}</span>
+                      ))
+                    }
+                  </span>
+                  { this.more({ color: '#BC4141'}) }
                 </div>
+                <Row
+                  type="flex"
+                  align="middle" >
+                  {
+                    songLists.result && songLists.result.slice(0, 8).map((list) => (
+                      <Col span={6} key={list.id}>
+                        <div className="song-list">
+                          <div className="list-info">
+                            <img src={list.picUrl} />
+                          </div>
+                          <p className="list-name nowrap-nums">{list.name}</p>
+                        </div>
+                      </Col>
+                    ))
+                  }
+                </Row>
               </div>
+              {
+                isLogin && (
+                  <div className="l-common new-album">
+                    <div className="header-nav">
+                      {
+                        Graphics.CustomizeCircle(options)
+                      }<span className="title">个性化推荐</span>
+                    </div>
+                  </div>
+              )}
               <div className="l-common new-album">
                 <div className="header-nav">
-                  <span className="title">新碟上架</span>
-                  <span className="more">更多<Icon type="arrow-right" style={{ marginLeft: '5px' }} /></span>
+                  {
+                    Graphics.CustomizeCircle(options)
+                  }<span className="title">新碟上架</span>
+                  { this.more({ color: '#BC4141'}) }
                 </div>
               </div>
               <div className="l-common rank-lists">
                 <div className="header-nav">
-                  <span className="title">榜单</span>
-                  <span className="more">更多<Icon type="arrow-right" style={{ marginLeft: '5px' }} /></span>
+                  {
+                    Graphics.CustomizeCircle(options)
+                  }<span className="title">榜单</span>
+                  { this.more({ color: '#BC4141'}) }
                 </div>
               </div>
             </div>

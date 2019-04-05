@@ -1,8 +1,12 @@
-@import './common/reset';
-@import './common/normalize';
+@import './reset/reset';
+@import './reset/normalize';
 @import './fonts/iconfont';
 @import './antd_override';
+@import './common/index';
 
 html, body {
   background: #f5f5f5;
+  font-size: 12px;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
 }
