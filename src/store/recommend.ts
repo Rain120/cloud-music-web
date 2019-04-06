@@ -1,5 +1,6 @@
 import { flow, types } from 'mobx-state-tree';
 import * as recommend from 'src/services/recommend';
+import _ from 'lodash';
 
 export const RecommendStore = types.model('RecommendStore', {
   loading: types.optional(types.boolean, false),
@@ -8,6 +9,7 @@ export const RecommendStore = types.model('RecommendStore', {
   songLists: types.optional(types.frozen(), {}),
   albums: types.optional(types.frozen(), {}),
   rankLists: types.optional(types.array(types.frozen()), []),
+  toplists: types.optional(types.array(types.frozen()), []),
 })
 .views(self => ({}))
 .actions(self => {
@@ -78,11 +80,38 @@ export const RecommendStore = types.model('RecommendStore', {
     }
   });
 
+  const loadToplists = flow(function*(idx?: number) {
+    let toplists: any = [];
+    try {
+      self.loading = true;
+      self.toplists.clear();
+      if (!_.isNumber(idx)) {
+        for (let i = 0; i < 24; i++) {
+          let response: any = yield recommend.recommendRankLists(i);
+          if (response) {
+            toplists.push(response);
+          }
+        }
+      } else {
+        let response: any = yield recommend.recommendRankLists(idx);
+        if (response) {
+          toplists.push(response);
+        }
+      }
+      self.toplists = toplists;
+      self.loading = false;
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+
   return {
     loadBanner,
     loadTags,
     loadSongLists,
     loadAlbums,
     loadRankLists,
+    loadToplists,
   }
 });

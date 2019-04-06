@@ -17,7 +17,7 @@ class App extends React.Component<AppProps, any> {
         <LocaleProvider locale={zhCN}>
           <div>
             <Routes />
-            <BackTop visibilityHeight={10} />
+            <BackTop />
           </div>
         </LocaleProvider>
       </Provider>
