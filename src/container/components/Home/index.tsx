@@ -23,7 +23,7 @@ export default class Home extends Component<HomeProps, any> {
   rankIdx: any = [3, 0, 2];
   state = {
     isLogin: false,
-    topLists: [] as any,
+    rankLists: [] as any,
   }
 
   constructor(props) {
@@ -36,18 +36,17 @@ export default class Home extends Component<HomeProps, any> {
     recommend.loadTags();
     recommend.loadSongLists();
     recommend.loadAlbums();
-    recommend.loadRankLists();
-    let topLists = [] as any;
-    this.rankIdx.map((item, index) => {
-      recommend.loadToplists(+item).then(() => {
-        let list = toJS(recommend.toplists)[0].playlist.tracks.slice(0, 10);
-        topLists.push(list);
-        console.log(topLists, list)
-        if (index === this.rankIdx.length - 1) {
-          this.setState({ topLists });
-        }
+    recommend.loadRankLists().then(() => {
+      let rankLists: any = _.uniqBy(toJS(recommend.rankLists), 'id').slice(0, 3);
+      this.rankIdx.map((item, index) => {
+        recommend.loadToplists(+item).then(() => {
+          let list = toJS(recommend.toplists)[0].playlist.tracks.slice(0, 10);
+          rankLists[index].topLists.push(list);
+        });
       });
-    });
+      console.log(rankLists)
+      return rankLists;
+    }).then((rankLists) => {console.log(123, rankLists);this.setState({ rankLists })});
   }
 
   componentDidMount() {
@@ -84,20 +83,19 @@ export default class Home extends Component<HomeProps, any> {
   }
 
   render() {
-    const { isLogin, topLists } = this.state;
+    const { isLogin, rankLists } = this.state;
     const { recommend } = this.props;
     let banners: any = toJS(recommend.banners);
     let tags: any = toJS(recommend.tags);
     let songLists: any = toJS(recommend.songLists);
     let albums: any = toJS(recommend.albums);
-    let rankLists: any = _.uniqBy(toJS(recommend.rankLists), 'id');
     let options: any = {
       style: {
         marginRight: '10px',
         border: '5px solid #BC4141',
       } as any,
     }
-    console.log(this.state)
+
     return (
       <Spin spinning={recommend.loading}>
         <div className="home-wrapper">
@@ -192,7 +190,7 @@ export default class Home extends Component<HomeProps, any> {
                     align="middle"
                     className="recommend-rank" >
                     {
-                      rankLists && rankLists.slice(0, 3).map((rank, index) => (
+                      rankLists.length && rankLists.map((rank, index) => (
                         <Col span={8} key={rank.id} className="rank-list">
                           <div className="rank-info">
                             <div className="rank-img">
@@ -205,17 +203,15 @@ export default class Home extends Component<HomeProps, any> {
                               </div>
                             </div>
                           </div>
+                          <div className="top-lists">
+                            {
+                              rankLists.topLists.length && rankLists.topLists.map((track, idx) => (
+                                <div key={track.id}><span>{idx + 1}</span>{track.name}</div>
+                              ))
+                            }
+                          </div>
                         </Col>
                       ))
-                    }
-                    {
-                      <div className="top-lists">
-                      {
-                        topLists.map((tracks, index) => tracks.map(track => (
-                          <div key={track.name + index}><span>{index + 1}</span>{track.name}</div>
-                        )))
-                      }
-                    </div>
                     }
                   </Row>
                 </div>
