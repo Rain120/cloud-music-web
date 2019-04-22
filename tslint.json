@@ -66,6 +66,7 @@
     "ordered-imports": false,
     "jsx-no-lambda": false,
     "interface-name": [true, "never-prefix"],
-    "prefer-const": false
+    "prefer-const": false,
+    "no-empty-interface": false
   }
 }
